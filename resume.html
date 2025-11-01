@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI-powered Resume Builder (HTML/CSS/JS)</title>
+<link rel="stylesheet" href="resume.css">
+</head>
+<body>
+  <div class="wrap">
+    <!-- Left: form controls -->
+    <div class="panel">
+      <h1>AI Resume Builder</h1>
+      <div class="top-controls">
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="margin:0;font-weight:700">Template</label>
+          <select id="templateSelect">
+            <option value="classic">Classic</option>
+            <option value="modern">Modern</option>
+            <option value="minimal">Minimal</option>
+          </select>
+        </div>
+        <div style="margin-left:auto">
+          <button class="btn ghost" id="saveLocal">Save</button>
+          <button class="btn" id="downloadPdf">Download PDF</button>
+        </div>
+      </div>
+
+      <label>Full name</label><input id="fullName" type="text" placeholder="Your Name"/>
+      <label>Role / Title</label><input id="role" type="text" placeholder="Frontend Developer"/>
+      <label>Email</label><input id="email" type="email" placeholder="you@example.com"/>
+      <label>Location</label><input id="location" type="text" placeholder="City,State,Country"/>
+      <label>Phone</label><input id="phone" type="text" placeholder="+91 99999 99999"/>
+      <label>Professional Summary (you can edit or auto-generate)</label>
+      <textarea id="summary" placeholder="Short professional summary..."></textarea>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button class="btn" id="generateAI">Generate AI Summary</button>
+        <button class="btn ghost" id="clearSummary">Clear</button>
+      </div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid #eef3fb"/>
+
+      <label>Skills (comma separated)</label>
+      <input id="skills" type="text" placeholder="JavaScript, React, HTML, CSS"/>
+      <label>Experience — add a job</label>
+      <div id="experienceList"></div>
+      <div style="margin-top:6px">
+        <button class="btn ghost" id="addJob">+ Add job</button>
+      </div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid #eef3fb"/>
+
+      <label>Education (one per line — format: Degree | Institute | Year)</label>
+      <textarea id="education" placeholder="M.sc Computer Science | ABC University | 2025"></textarea>
+
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" id="exportJson">Export YR</button>
+        <label class="btn ghost" style="cursor:pointer">
+          Import YR
+          <input id="importJson" class="import-file" type="file" accept=".json"/>
+        </label>
+        <button class="btn ghost" id="resetAll">Reset</button>
+      </div>
+
+      <footer class="muted">
+        Tip: Use "Generate AI Summary" to create a professional summary & achievement bullets from your title, skills, and experience. You can edit any generated content.
+      </footer>
+    </div>
+
+    <!-- Right: preview -->
+    <div class="panel preview-wrap">
+      <div class="flex-between no-print" style="margin-bottom:8px">
+        <div><strong>Live Preview</strong></div>
+        <div>
+          <button class="btn ghost" id="togglePreviewData">Toggle raw data</button>
+        </div>
+      </div>
+
+      <div id="previewParent" class="template-classic">
+        <div class="resume" id="resume">
+          <div class="r-header">
+            <div class="r-left">
+              <div class="avatar" id="avatar">YR</div>
+              <div>
+                <div class="name" id="p_name">Your Name</div>
+                <div class="meta" id="p_role">Frontend Developer</div>
+                <div class="muted" id="p_contact">you@example.com — City,State,Country</div>
+              </div>
+            </div>
+            <div class="meta" style="text-align:right" id="p_summary_short">
+              <!-- short summary -->
+            </div>
+          </div>
+
+          <div class="section" id="summarySection">
+            <h3>Professional Summary</h3>
+            <div id="p_summary">A results-driven developer with experience building web apps.</div>
+          </div>
+
+          <div class="section" id="expSection">
+            <h3>Experience</h3>
+            <div id="p_experience"></div>
+          </div>
+
+          <div class="section" id="eduSection">
+            <h3>Education</h3>
+            <div id="p_education"></div>
+          </div>
+
+          <div class="section" id="skillsSection">
+            <h3>Skills</h3>
+            <div id="p_skills"></div>
+          </div>
+        </div>
+      </div>
+
+      <pre id="rawData" style="display:none;margin-top:12px;background:#f3f9ff;padding:12px;border-radius:8px;overflow:auto;height:140px"></pre>
+    </div>
+  </div>
+
+</body>
+</html>
